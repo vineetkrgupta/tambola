@@ -1,0 +1,126 @@
+<!------pluging---------------------------->
+<script type="text/javascript" src="../../../ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<div class="agentListDiv">
+<div class="titleDiv">Booking agent list</div>
+<div class="listDiv" id="listDiv">
+
+<!----------------dynamically generated content-->
+
+
+</div>
+<br><br>
+</div>
+
+<script>
+getAgentList();
+    function getAgentList(){
+        var listDiv=document.getElementById("listDiv");
+        
+$.get('../../api/userApi/getAgentList.html',
+{},
+function(data){
+var agentJsonArray=JSON.parse(data).data;
+var htmlStr="";
+
+for(var i=0;i<agentJsonArray.length;i++){
+var agentName=agentJsonArray[i].agentName;
+var agentPhone=agentJsonArray[i].agentPhone;
+htmlStr=htmlStr+'<div class="infoDiv">'+agentName+'<a href="tel:'+agentPhone+'"><button class="callBtn">Call</button></a></div><br><br>';
+}
+listDiv.innerHTML=htmlStr;
+
+});
+
+
+    }
+</script>
+
+
+<style>
+    *{
+        outline: none;
+    }
+    body{
+        background-image: linear-gradient(to bottom right, rgb(0, 204, 255), rgb(0, 255, 128));
+    }
+
+.agentListDiv{
+    width: 60%;
+    margin-left: 20%;
+    border:2px solid white;
+    border-radius: 30px;
+}
+.titleDiv{
+    width: 100%;
+    font-size: 30px;
+    color:black;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+.listDiv{
+    width: 100%;
+}
+.infoDiv{
+    width: 100%;
+    font-size: 30px;
+    color: black;
+    padding-left: 20px;
+}
+.callBtn{
+    position: absolute;
+    width: 10%;
+    font-size: 20px;
+    border:0px solid grey;
+    background: yellow;
+    padding: 5px;
+    border-radius: 10px;
+    right: 22%;
+}
+
+
+
+
+    @media only screen and (max-width: 1000px) { 
+
+
+        .agentListDiv{
+    width: 90%;
+    margin-left: 5%;
+    border:2px solid white;
+    border-radius: 30px;
+}
+.titleDiv{
+    width: 100%;
+    font-size: 80px;
+    color:black;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+.listDiv{
+    width: 100%;
+}
+.infoDiv{
+    width: 100%;
+    font-size: 50px;
+    color: black;
+    padding-left: 20px;
+}
+.callBtn{
+    position: absolute;
+    width: 20%;
+    font-size: 40px;
+    border:0px solid grey;
+    background: yellow;
+    padding: 10px;
+    border-radius: 20px;
+    right: 10%;
+}
+
+
+
+    }
+</style>
+    
